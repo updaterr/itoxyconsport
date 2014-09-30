@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140906135302) do
+ActiveRecord::Schema.define(version: 20140930174458) do
 
   create_table "competition_strongs", force: true do |t|
     t.string   "title"
