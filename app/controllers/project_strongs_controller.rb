@@ -30,7 +30,7 @@ class ProjectStrongsController < ApplicationController
 
     respond_to do |format|
       if @project_strong.save
-        format.html { redirect_to @project_strong, notice: 'Project strong was successfully created.' }
+        format.html { redirect_to project_strongs_path, notice: 'Projekt utworzony pomyślnie' }
         format.json { render :show, status: :created, location: @project_strong }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class ProjectStrongsController < ApplicationController
   def update
     respond_to do |format|
       if @project_strong.update(project_strong_params)
-        format.html { redirect_to @project_strong, notice: 'Project strong was successfully updated.' }
+        format.html { redirect_to project_strongs_path, notice: 'Project strong was successfully updated.' }
         format.json { render :show, status: :ok, location: @project_strong }
       else
         format.html { render :edit }
@@ -58,7 +58,7 @@ class ProjectStrongsController < ApplicationController
   def destroy
     @project_strong.destroy
     respond_to do |format|
-      format.html { redirect_to project_strongs_url, notice: 'Project strong was successfully destroyed.' }
+      format.html { redirect_to project_strongs_path, notice: 'Project strong was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
