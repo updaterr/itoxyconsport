@@ -22,7 +22,7 @@
     <%= f.label "Opis" %><br>
     <%= f.text_area :description %>
   </div>
-  <div class="field hidden">
+  <div class="field">
     <%= f.label "Opis" %><br>
     <%= f.select :project_types_id, ProjectTypes.all.collect { |p| [ p.name, p.id ] }, include_blank: false %>
 
