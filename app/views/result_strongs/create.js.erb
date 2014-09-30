@@ -1,0 +1,5 @@
+<%= @result_strong.save %>
+$("#tableajax").html("");
+$("#tableajax").html("<%= j(render('elements', :result_strong=> @result_strong)) %>");
+
+$("#errorlist").html("<%= j(render('errors')) %>");

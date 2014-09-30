@@ -1,0 +1,6 @@
+<% @group_types.each do |group_type| %>
+    <tr id="tr_<%= group_type.id %>">
+      <td><%= best_in_place [@project_strong, group_type], :name, :type => :input %></td>
+      <td><%= link_to 'Usuń', [@project_strong, group_type], method: :delete, remote: true, data: { confirm: 'Czy jesteś pewien ?' } %></td>
+    </tr>
+<% end %>

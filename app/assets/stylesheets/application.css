@@ -1,0 +1,62 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ *= require bootstrap-wysihtml5
+ */
+
+.body-resultview
+{
+    color:white;
+    background-color: black;
+    font-size:60px;
+    text-align: center;
+    font-family: 'Segoe-ui','Consolas', 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace;
+}
+.purr {
+    position: fixed;
+    top: 100px;
+    right: 100px;
+    width: 250px;
+    padding: 20px;
+    background-color: #FCC;
+    border: solid 2px #C66;
+}
+
+.navbar-login
+{
+    width: 305px;
+    padding: 10px;
+    padding-bottom: 0px;
+}
+
+.navbar-login-session
+{
+    padding: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+.icon-size
+{
+    font-size: 87px;
+}
+
+/*show dropdown on hover in navbar*/
+ul.nav li.dropdown:hover ul.dropdown-menu{
+    display: block;
+}
+ul.forname li.dropdown:hover ul.dropdown-menu{
+    display: block;
+}
+/*show dropdown on hover in navbar*/

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Kompleksowy system do tworzenia i zarządzania różnemu rodzajami konkursami, takie jak biegi, sprint, zawody StrongMan, szachy">
+  <meta name="author" content="OxyCon">
+  <link rel="icon" href="">
+
+  <title>OxyCon Sport - Dotleń konkursy</title>
+
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+  <!--<link href="http://bootswatch.com/darkly/bootstrap.min.css" rel="stylesheet">-->
+  <!--<link href="https://sher.ly/lib/bootstrap.css" rel="stylesheet">-->
+  <!--<link href="http://bootswatch.com/cerulean/bootstrap.min.css" rel="stylesheet">-->
+  <!--<link href="http://bootswatch.com/cyborg/bootstrap.min.css" rel="stylesheet">-->
+  <!--<link href="http://bootswatch.com/darkly/bootstrap.min.css" rel="stylesheet">-->
+
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+</head>
+
+<% unless current_page?(result_view_index_path) %>
+    <body>
+
+    <%= render 'layouts/navbar' %>
+
+    <% if user_signed_in? %>
+        <div class="container-fluid">
+    <% end %>
+    <div class="row">
+
+      <%= render 'layouts/sidebar' if user_signed_in? %>
+
+      <% if user_signed_in? %>
+          <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      <% end %>
+
+      <div class="col-lg-12">
+
+        <%= render 'layouts/alarms' %>
+
+        <% if user_signed_in? %>
+            </div>
+        <% end %>
+
+        <%= yield %>
+
+        </div>
+
+        <% if user_signed_in? %>
+            </div>
+        <% end %>
+
+        </div>
+
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        </body>
+<% else %>
+    <%= yield %>
+<% end %>
+</html>

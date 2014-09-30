@@ -1,0 +1,17 @@
+<% @player_strongs.each do |player_strong| %>
+    <tr id="tr_<%= player_strong.id %>">
+      <td><%= best_in_place [@project_strong, player_strong], :presence, :type => :checkbox, :collection => [raw("Nie"), raw("Tak")] %></td>
+      <td><%= best_in_place [@project_strong, player_strong], :name, :type => :input %></td>
+      <td><%= best_in_place [@project_strong, player_strong], :surname, :type => :input %></td>
+      <td><%= best_in_place [@project_strong, player_strong], :photopath, :type => :input %></td>
+      <td><%= best_in_place [@project_strong, player_strong], :group_type_id, :type => :select, :collection => @project_strong.group_types.all.map{|m| [m.id, "#{m.name}"]} %></td>
+      <td><%= best_in_place [@project_strong, player_strong], :city, :type => :input %></td>
+      <td><%= best_in_place [@project_strong, player_strong], :country, :type => :input %></td>
+      <td><%= best_in_place [@project_strong, player_strong], :old, :type => :input %></td>
+      <td><%= best_in_place [@project_strong, player_strong], :weight, :type => :input %></td>
+      <td><%= best_in_place [@project_strong, player_strong], :height, :type => :input %></td>
+      <td><%= best_in_place [@project_strong, player_strong], :description, :type => :textarea %></td>
+
+      <td><%= link_to 'Usuń', [@project_strong, player_strong], method: :delete, remote: true, data: { confirm: 'Czy jesteś pewien ?' } %></td>
+    </tr>
+<% end %>

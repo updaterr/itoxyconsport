@@ -1,0 +1,146 @@
+<br/>
+<div id="wrap">
+  <div class="container" id="home">
+    <div class="row">
+      <div class="col-md-7">
+        <h3>
+          OxyCon Sport pomaga zarządzać konkursami. Wygodnie dodawaj i usuwaj zawodników, konkurencje, grupy. Wyświetlaj wyniki, śledź zawodników na mapie i pokazuj to kibicom na projektorze.
+        </h3>
+        <img class="media-object img-rounded img-responsive " src="http://placehold.it/600x300">
+      </div>
+      <div class="col-md-5">
+        <h2>Rejestracja</h2>
+        <h4>Utwórz swoje darmowe konto</h4>
+
+        <%= form_for(:user, :url => registration_path(:user)) do |f| %>
+
+            <div class="row">
+              <div class="col-xs-6 col-md-6">
+                <%= f.text_field :first_name, autofocus: true, :placeholder=>"Imię", :class => "form-control input-lg" %>
+              </div>
+
+              <div class="col-xs-6 col-md-6">
+                <%= f.text_field :last_name, autofocus: true, :placeholder=>"Nazwisko", :class => "form-control input-lg" %>
+              </div>
+            </div>
+            <br/>
+            <div>
+              <%= f.email_field :email, autofocus: true, :placeholder=>"Email", :class => "form-control input-lg" %>
+            </div>
+
+            <div><% if @validatable %><i>(<%= @minimum_password_length %> characters minimum)</i><% end %><br />
+              <%= f.password_field :password, autocomplete: "off", :placeholder=>"Hasło", :class => "form-control input-lg" %>
+            </div>
+            <br/>
+            <div>
+              <%= f.password_field :password_confirmation, autocomplete: "off", :placeholder=>"Powtórz hasło", :class => "form-control input-lg" %>
+            </div>
+
+            <span class="help-block">Klikając przycisk Rejestracja, akceptujesz nasz <a href="#">Regulamin</a> oraz potwierdzasz zapoznanie się z <a href="#">Zasadami wykorzystywania plików cookie</a>.</span>
+
+            <div><%= f.submit "Rejestracja", :class => "btn btn-lg btn-primary btn-block" %></div>
+        <% end %>
+
+      </div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+  </div>
+</div>
+<style>
+    footer
+    {
+        background-color: #2E2F30;color:white;padding:20px;
+    }
+    .footer ul li a, .footer ul li a:link, .footer ul li a:visited, .footer ul li a:active, .footer ul li a:hover {
+        color: #FFFFFF;
+    }
+
+    .drop-up {
+        top: auto;
+        bottom: 100% !important;
+    }
+</style>
+
+<footer>
+  <div class="container">
+    <div class="col-lg-10 col-lg-offset-1">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="row">
+            <div class="col-sm-12">
+              <!-- logo -->
+            </div>
+            <div class="col-sm-4">
+              <ul class="">
+                <li><a href="#">Kontakt</a></li>
+                <li><a href="#">Baza wiedzy i API</a></li>
+                <li><a href="#">Regulamin</a></li>
+                <li><a href="#">Zasady wykorzystania plików cookie</a></li>
+                <li><a href="#">Polityka prywatności</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-4">
+              <ul class="">
+                <li><a href="https://twitter.com/#">Śledź nas na Twitter</a></li>
+                <li><a href="https://www.facebook.com/#">Polub nas na Facebooku</a></li>
+                <li><a href="http://blog.#.pl">Nasz blog</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <div id="lang-switcher" class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                  English											<span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu drop-up" role="menu">
+                  <li>
+                    <a role="menuitem" tabindex="-1" href="/pl">Polski</a>
+                  </li>
+                  <li>
+                    <a role="menuitem" tabindex="-1" href="/en">English</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <P>Zapisz się do newsletter i otrzymuj najnowsze wiadomości i aktualizacje</P>
+          <div class="row">
+            <div class="col-xs-6 col-md-6">
+              <input class="form-control" name="emailadress" placeholder="Adres email" type="email" autofocus />
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <button class="btn btn-primary">Zapisz się</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-6 col-md-4">
+              <p class="address">Oxycon<br>
+                ul. Piłsudskiego 32<br>
+                Płock. Polska<br>
+                09-540</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<div class="row-fluid">
+  <div class="span12">
+    <div class="span8">
+      <a href="#">Terms of Service</a>
+      <a href="#">Privacy</a>
+      <a href="#">Security</a>
+    </div>
+    <div class="span4">
+      <p class="muted pull-right">© 2013 Company Name. All rights reserved</p>
+    </div>
+  </div>
+</div>

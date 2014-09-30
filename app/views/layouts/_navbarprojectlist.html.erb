@@ -1,0 +1,39 @@
+<% if user_signed_in? %>
+    <ul class="forname navbar-nav">
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          <div class="navbar-brand"><i>Oxycon Sport</i> <%= " - " + getCurrentProjectStrongName() %> <i class="fa fa-caret-down"></i></div>
+        </a>
+        <ul class="dropdown-menu">
+          <% @project_lists.each do |project_strong| %>
+              <li>
+                <%= link_to (project_strong) do %>
+                    <div>
+                      <strong><%= project_strong.name %></strong>
+                                    <span class="pull-right text-muted">
+                                        <em><%= time_ago_in_words(project_strong.created_at) %> temu</em>
+                                    </span>
+                    </div>
+                    <div><%= truncate(project_strong.description, :length => 60) %></div>
+                <% end %>
+
+              </li>
+          <% end %>
+
+          <li class="divider"></li>
+
+          <li>
+            <%= link_to new_project_strong_path do %>
+                <div class="text-center">
+                  <button type="button" class="btn btn-primary btn-block">Utwórz nowy projekt</button>
+                </div>
+            <% end %>
+          </li>
+
+        </ul>
+      </li>
+    </ul>
+
+<% else %>
+    <div class="navbar-brand">Oxycon Sport</div>
+<% end %>

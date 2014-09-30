@@ -1,0 +1,79 @@
+<br/>
+<div id="wrap">
+  <div class="container" id="home">
+    <div class="row">
+      <div class="col-md-7">
+        <h3>
+          OxyCon Sport pomaga zarządzać konkursami typu StrongMan. Wygodnie dodawaj i usuwaj zawodników, konkurencje, grupy. Wyświetlaj wyniki, teksty.
+          <br/> <br/>
+          W niedalekiej przyszłości:
+          <ul>
+            <li>Śledź zawodników na mapie i pokazuj to kibicom na projektorze.</li>
+            <li>Obsługa więcej typu konkursów (biegi, szachy, wioślarstwo, olimpiady)</li>
+            <li>Rejetracja uczestników konkursu online</li>
+            <li>Chat między użytkownikami</li>
+            <li>Automatycznie tworzenie strony konkursu</li>
+          </ul>
+          <div class="pull-right">i wiele więcej...</div>
+        </h3>
+        <!--<img class="media-object img-rounded img-responsive " src="http://placehold.it/600x300">-->
+
+        <a href="#"><h4><i class="fa fa-github fa-5x"></i>github.com/projekt</h4></a>
+      </div>
+      <div class="col-md-5">
+        <h2>Rejestracja</h2>
+        <h4>Utwórz swoje darmowe konto</h4>
+
+        <%= form_for(:user, :url => registration_path(:user)) do |f| %>
+
+            <div class="row">
+              <div class="col-xs-6 col-md-6">
+                <%= f.text_field :first_name, autofocus: true, :placeholder=>"Imię", :class => "form-control input-lg" %>
+              </div>
+
+              <div class="col-xs-6 col-md-6">
+                <%= f.text_field :last_name, autofocus: true, :placeholder=>"Nazwisko", :class => "form-control input-lg" %>
+              </div>
+            </div>
+            <br/>
+            <div>
+              <%= f.email_field :email, autofocus: true, :placeholder=>"Email", :class => "form-control input-lg" %>
+            </div>
+
+            <div><% if @validatable %><i>(<%= @minimum_password_length %> characters minimum)</i><% end %><br />
+              <%= f.password_field :password, autocomplete: "off", :placeholder=>"Hasło", :class => "form-control input-lg" %>
+            </div>
+            <br/>
+            <div>
+              <%= f.password_field :password_confirmation, autocomplete: "off", :placeholder=>"Powtórz hasło", :class => "form-control input-lg" %>
+            </div>
+
+            <span class="help-block">Klikając przycisk Rejestracja, akceptujesz nasz <a href="#">Regulamin</a> oraz potwierdzasz zapoznanie się z <a href="#">Zasadami wykorzystywania plików cookie</a>.</span>
+
+            <div><%= f.submit "Rejestracja", :class => "btn btn-lg btn-primary btn-block" %></div>
+        <% end %>
+
+      </div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+  </div>
+</div>
+<style>
+    footer
+    {
+        background-color: #2E2F30;color:white;padding:20px;
+    }
+</style>
+<footer>
+  <div class="row">
+    <div class="span12">
+      <div class="span8">
+      </div>
+      <div class="span4">
+        <p class="text-center">2014 OxyCon Sport - Dotleń konkursy !<br/>Wersja strony stworzona na konkurs Informatyczny Akademii Morskiej w Szczecinie </p>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,8 @@
+<% @competition_strongs.each do |competition_strong| %>
+    <tr id="tr_<%= competition_strong.id %>">
+      <td><%= best_in_place [@project_strong, competition_strong], :title, :type => :input %></td>
+      <td><%= best_in_place [@project_strong, competition_strong], :group_types_id, :type => :select, :collection => @project_strong.group_types.all.map{|m| [m.id, "#{m.name}"]} %></td>
+      <td><%= best_in_place [@project_strong, competition_strong], :countrepeat, :type => :input %></td>
+      <td><%= link_to 'Usuń', [@project_strong, competition_strong], method: :delete, remote: true, data: { confirm: 'Czy jesteś pewien ?' } %></td>
+    </tr>
+<% end %>

@@ -1,0 +1,16 @@
+<%= @competition_strong.save %>
+$("#tableajax").html("");
+$("#tableajax").html("<%= j(render('elements', :competition_strongs=> @competition_strongs)) %>");
+
+$("#errorlist").html("<%= j(render('errors')) %>");
+
+$("#presencecheckbox").val('');
+$("#nametextfield").val('');
+$("#surnametextfield").val('');
+$("#photopathtextfield").val('');
+$("#citytextfield").val('');
+$("#countrytextfield").val('');
+$("#oldnumberfield").val('');
+$("#weightnumberfield").val('');
+$("#heightnumberfield").val('');
+$("#desctextarea").val('');

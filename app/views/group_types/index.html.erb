@@ -1,0 +1,27 @@
+<h1>Lista grup</h1>
+
+<div>
+  <%= form_for [@project_strong, @group_type], remote:true do |f| %>
+      <table class="table table-hover table-responsive">
+        <thead>
+        <tr>
+          <th>Nazwa</th>
+          <th colspan="1"></th>
+        </tr>
+        </thead>
+
+        <tbody id="tableajax" >
+        <%= render 'elements' %>
+        </tbody>
+        <tbody>
+        <tr>
+          <td><%= f.text_field :name, :id => "nametextfield", :placeholder => "Nazwa grupy", :class => "form-control"%></td>
+          <td><%= f.submit "Dodaj grupę", :class => "btn btn-primary" %></td>
+        </tr>
+        </tbody>
+      </table>
+  <% end %>
+
+  <div id="errorlist">
+  </div>
+</div>

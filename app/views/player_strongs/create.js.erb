@@ -1,0 +1,8 @@
+<%= @player_strong.save %>
+$("#tableajax").html("");
+$("#tableajax").html("<%= j(render('elements', :player_strong=> @player_strong)) %>");
+
+$("#errorlist").html("<%= j(render('errors')) %>");
+
+$("#titletextfield").val('');
+$("#numbertextfield").val('');

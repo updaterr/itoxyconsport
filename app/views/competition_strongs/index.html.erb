@@ -1,0 +1,31 @@
+<h1>Lista konkurencji</h1>
+
+<div>
+  <%= form_for [@project_strong, @competition_strong], remote:true do |f| %>
+      <table class="table table-hover table-responsive">
+        <thead>
+        <tr>
+          <th>Nazwa</th>
+          <th>Dla grupy</th>
+          <th>Serii</th>
+          <th colspan="1"></th>
+        </tr>
+        </thead>
+
+        <tbody id="tableajax" >
+        <%= render 'elements' %>
+        </tbody>
+        <tbody>
+        <tr>
+          <td><%= f.text_field :title, :id => "titletextfield", :placeholder => "Nazwa konkurencji", :class => "form-control"%></td>
+          <td><%= f.select(:group_types_id, @project_strong.group_types.all.collect { |p| [ p.name, p.id ] }, {}, { :class => 'form-control', include_blank: true }) %></td>
+          <td><%= f.number_field :countrepeat, :id => "numbertextfield", :placeholder => "Liczba serii", :class => "form-control" %></td>
+          <td><%= f.submit "Dodaj konkurencje", :class => "btn btn-primary" %></td>
+        </tr>
+        </tbody>
+      </table>
+  <% end %>
+
+  <div id="errorlist">
+  </div>
+</div>

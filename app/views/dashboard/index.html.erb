@@ -1,0 +1,373 @@
+<h1>Kokpit <%= @competitionName %></h1>
+
+
+<div class="row">
+  <!-- widget -->
+  <div class="col-lg-12">
+    <div class="chat-panel panel panel-default">
+      <div class="panel-heading">
+        <i class="fa fa-gears fa-fw"></i>
+        Opcje główne
+      </div>
+      <div class="panel-body">
+        <div class="row" style="margin:5px;">
+          <%= form_for('', method: :get) do |f| %>
+              <div class="form-group">
+                <label>Konkurencja</label>
+                <%= f.select(:compid, options_for_select(@project_strong.competition_strongs.all.collect {|p| [ p.title + " - " + @project_strong.group_types.find(p.group_types_id).name + " - " + p.countrepeat.to_s + " serie", p.id] }, :selected => params[:compid].to_i), {}, {:class => 'form-control', :onchange => "this.form.submit();" }) %>
+              </div>
+          <% end %>
+
+          <%= link_to 'Renderuj widok dla projektora (F11-maksymalizuj)', nil, :class => "btn btn-success btn-block", :onclick => "popup()" %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if params[:compid] %>
+
+    <div class="row">
+      <!-- widget -->
+      <div class="col-lg-12">
+        <div class="chat-panel panel panel-default">
+          <div class="panel-heading">
+            <i class="fa fa-info-circle fa-fw"></i>
+            Informacje o całym konkursie
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-3 col-md-6">
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    <div class="row">
+                      <div class="col-xs-3">
+                        <i class="fa fa-child fa-5x"></i>
+                      </div>
+                      <div class="col-xs-9 text-right">
+                        <div class="h2"><%= getCountAllPlayers() %></div>
+                        <div>Zawodników w konkursie!</div>
+                      </div>
+                    </div>
+                  </div>
+                  <a href="#" onclick="sendAllPlayersText()">
+                    <div class="panel-footer">
+                      <span class="pull-left">Pokaż to w prezentacji</span>
+                      <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                      <div class="clearfix"></div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <!--@@@@@@@@@@@@@@@@@@-->
+              <div class="col-lg-3 col-md-6">
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    <div class="row">
+                      <div class="col-xs-3">
+                        <i class="fa fa-sitemap fa-5x"></i>
+                      </div>
+                      <div class="col-xs-9 text-right">
+                        <div class="h2"><%= getCountAllCompetitions() %></div>
+                        <div>Konkurencji w konkursie!</div>
+                      </div>
+                    </div>
+                  </div>
+                  <a href="#" onclick="sendAllCompetitionText()">
+                    <div class="panel-footer">
+                      <span class="pull-left">Pokaż to w prezentacji</span>
+                      <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                      <div class="clearfix"></div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <!--@@@@@@@@@@@@@@@@@@-->
+              <div class="col-lg-3 col-md-6">
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    <div class="row">
+                      <div class="col-xs-3">
+                        <i class="fa fa-line-chart fa-5x"></i>
+                      </div>
+                      <div class="col-xs-9 text-right">
+                        <div class="h2"><%= getCountAllResults() %></div>
+                        <div>Łączna ilość kilogramów</div>
+                      </div>
+                    </div>
+                  </div>
+                  <a href="#" onclick="sendAllResultText()">
+                    <div class="panel-footer">
+                      <span class="pull-left" onclick="sendAllResultsText()">Pokaż to w prezentacji</span>
+                      <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                      <div class="clearfix"></div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <!--@@@@@@@@@@@@@@@@@@-->
+              <div class="col-lg-3 col-md-6">
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    <div class="row">
+                      <div class="col-xs-3">
+                        <i class="fa fa-group fa-5x"></i>
+                      </div>
+                      <div class="col-xs-9 text-right">
+                        <div class="h2"><%= getCountAllGroups() %></div>
+                        <div>Grup będących w konkursie </div>
+                      </div>
+                    </div>
+                  </div>
+                  <a href="#" onclick="sendAllResultText()">
+                    <div class="panel-footer">
+                      <span class="pull-left" onclick="sendAllGroupText()">Pokaż to w prezentacji</span>
+                      <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                      <div class="clearfix"></div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- widget -->
+    </div>
+
+    <div class="row">
+      <!-- widget -->
+      <div class="col-lg-4">
+        <div class="chat-panel panel panel-default">
+          <div class="panel-heading">
+            <i class="fa fa-info-circle fa-fw"></i>
+            Informacje o tej konkurencji
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-6 col-md-6">
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    <div class="row">
+                      <div class="text-center">
+                        <div class="h2"><%= getCountCompetitionPlayers(@compid) if params[:compid] %><%= "#" unless params[:compid] %></div>
+                        <div>Zawodników w konkurencji</div>
+                      </div>
+                    </div>
+                  </div>
+                  <a href="#" onclick="sendAllPlayerText()">
+                    <div class="panel-footer">
+                      <span class="pull-left" onclick="sendPlayersInCompetitionText()">Pokaż to w prezentacji</span>
+                      <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                      <div class="clearfix"></div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <!--@@@@@@@@@@@@@@@@@@-->
+              <div class="col-lg-6 col-md-6">
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    <div class="row">
+                      <div class="text-center">
+                        <div class="h2"><%= getCountCompetitionResults(@compid) if params[:compid] %><%= "#" unless params[:compid] %></div>
+                        <div>Kilogramów w konkurencji</div>
+                      </div>
+                    </div>
+                  </div>
+                  <a href="#" onclick="sendAllResultText()">
+                    <div class="panel-footer">
+                      <span class="pull-left" onclick="sendResultsInCompetitionText()">Pokaż to w prezentacji</span>
+                      <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                      <div class="clearfix"></div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- widget -->
+
+      <div class="col-lg-4">
+        <div class="chat-panel panel panel-default">
+          <div class="panel-heading">
+            <i class="fa fa-exchange fa-fw"></i>
+            Wyniki
+          </div>
+          <div class="panel-body">
+            <div class="row" style="margin:5px;">
+
+              <button type="button" class="btn btn-primary btn-block" onclick="showTableResultInCompetition()">Pokaż tabele wyników konkurencji</button>
+
+              <!--<button type="button" class="btn btn-primary btn-block" onclick="showTableResultInProject()">Pokaż tabele wyników całego konkursu</button>-->
+
+              <!--<button type="button" class="btn btn-primary btn-block" onclick="showTop3ResultInProject()">Pokaż TOP3 wyników całego konkursu</button>-->
+              <!--<button type="button" class="btn btn-primary btn-block" onclick="showTop3ResultInProject()">Pokaż tabele wyników tej grupy</button>-->
+
+              <button type="button" class="btn btn-primary btn-block" onclick="showTop3ResultInProject()">Pokaż TOP3 wyników tej grupy</button>
+              <br/>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- widget -->
+
+      <div class="col-lg-4">
+        <div class="chat-panel panel panel-default">
+          <div class="panel-heading">
+            <i class="fa fa-list fa-fw"></i>
+            Lista zawodników tej konkurencji
+          </div>
+          <!-- /.panel-heading -->
+          <div class="panel-body">
+            <%= form_for('', method: :get) do |f| %>
+                <%= select_tag 'players[]', options_for_select(
+                        @project_strong.result_strongs.where(:competition_strong_id => @compid).map {|s| [@project_strong.player_strongs.find(s.player_strong_id).name + " " + @project_strong.player_strongs.find(s.player_strong_id).surname, @project_strong.player_strongs.find(s.player_strong_id).id]}
+                ), :multiple => false, :id => "listplayers", :class => "form form-control",:size => 5, :style => "width:100%;font-size:16px;" %>
+                </div>
+                <!-- /.panel-body -->
+                <div class="panel-footer">
+                  <button type="button" class="btn btn-primary btn-block" onclick="showPlayer()">Prezentuj zaznaczonego zawodnika</button>
+            <% end %>
+            </div>
+            <!-- /.panel-footer -->
+            </div>
+      </div>
+      <!-- widget -->
+    </div>
+
+    <div class="row">
+      <!-- widget -->
+      <div class="col-lg-12">
+        <div class="chat-panel panel panel-default">
+          <div class="panel-heading">
+            <i class="fa fa-header fa-fw"></i>
+            Wyświetl tekst
+          </div>
+          <!-- /.panel-heading -->
+          <div class="panel-body">
+            <textarea id="wysi" class='wysihtml5' style="width:100%;height:200px;">Witamy na konkursie <%= getCurrentProjectStrongName %></textarea>
+          </div>
+          <!-- /.panel-body -->
+          <div class="panel-footer">
+            <div class="text-right">
+              <button type="button" class="btn btn-primary" onclick="sendText()">Pokaż na prezentacji</button>
+            </div>
+          </div>
+          <!-- /.panel-footer -->
+        </div>
+      </div>
+      <!-- widget -->
+    </div>
+<%else %>
+    <h1>Najpierw wybierz konkurencje powyżej</h1>
+<%end %>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.wysihtml5').wysihtml5({
+            "font-styles": true,
+            "emphasis": true,
+            "lists": true,
+            "html": true,
+            "link": false,
+            "image": false,
+            "color": false,
+            "blockquote": true,
+            "locale": 'pl-PL'
+        });
+    });
+
+    function clearPage()
+    {
+        var popup = window.open('','renderedview');
+        $( "body", popup.document ).empty();
+    }
+    function popup() {
+        var popupWindow = window.open(null, "renderedview", "width=1024,height=768");
+
+        // overwrite the entire document with our own HTML
+        var gettext = $('textarea#wysi').val();
+        var styles = "color:white; background-color: black;font-size:60px;text-align: center;font-family: 'Segoe-ui','Consolas', 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace;";
+        popupWindow.document.write("<body style='" + styles + "'>" + gettext + "</body>");
+
+//        //Using jQuery for DOM manipulation here
+//        var $popup = $("body", popupWindow.document);
+//        $popup.css("font-size", "72px");
+
+    }
+    function sendText()
+    {
+        var popup = window.open('','renderedview');
+        clearPage();
+        var gettext = $('textarea#wysi').val();
+
+        var styles = "color:white; background-color: black;font-size:60px;text-align: center;font-family: 'Segoe-ui','Consolas', 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace;";
+        popup.document.write("<body style='" + styles + "'>" + gettext + "</body>");
+
+//        var styles = {
+//            backgroundColor : "red",
+//            fontWeight: "bold"
+//        };
+//        $( "body", popup.document ).css( styles );
+    }
+    function sendAllPlayersText()
+    {
+        clearPage();
+        var popup = window.open("<%= result_view_index_url %>?showaction=sendAllPlayersText&projectid=<%= params[:project_strong_id] %>",'renderedview');
+
+    }
+    function sendAllCompetitionText()
+    {
+        clearPage();
+        var popup = window.open("<%= result_view_index_url %>?showaction=sendAllCompetitionText&projectid=<%= params[:project_strong_id] %>",'renderedview');
+    }
+    function sendAllResultsText()
+    {
+        clearPage();
+        var popup = window.open("<%= result_view_index_url %>?showaction=sendAllResultsText&projectid=<%= params[:project_strong_id] %>",'renderedview');
+    }
+    function sendAllGroupText()
+    {
+        clearPage();
+        var popup = window.open("<%= result_view_index_url %>?showaction=sendAllGroupText&projectid=<%= params[:project_strong_id] %>",'renderedview');
+    }
+    function sendPlayersInCompetitionText()
+    {
+        clearPage();
+        var popup = window.open("<%= result_view_index_url %>?showaction=sendPlayersInCompetitionText&projectid=<%= params[:project_strong_id] %>&competitionid=<%= params[:compid] %>",'renderedview');
+    }
+    function sendResultsInCompetitionText()
+    {
+        clearPage();
+        var popup = window.open("<%= result_view_index_url %>?showaction=sendResultsInCompetitionText&projectid=<%= params[:project_strong_id] %>&competitionid=<%= params[:compid]%>",'renderedview');
+    }
+    function showTableResultInCompetition()
+    {
+        clearPage();
+        var popup = window.open("<%= result_view_index_url %>?showaction=showTableResultInCompetition&projectid=<%= params[:project_strong_id] %>&competitionid=<%= params[:compid]%>",'renderedview');
+    }
+    function showTableResultInProject()
+    {
+        clearPage();
+        var popup = window.open("<%= result_view_index_url %>?showaction=showTableResultInProject&projectid=<%= params[:project_strong_id] %>&competitionid=<%= params[:compid]%>",'renderedview');
+    }
+    function showTop3ResultInProject()
+    {
+        clearPage();
+        var popup = window.open("<%= result_view_index_url %>?showaction=showTop3ResultInProject&projectid=<%= params[:project_strong_id] %>&competitionid=<%= params[:compid]%>",'renderedview');
+    }
+    function showPlayer()
+    {
+        clearPage();
+        //get playerid from selectid = listplayers
+        var id = $("#listplayers").val();
+
+        var popup = window.open("<%= result_view_index_url %>?showaction=showPlayer&playerid=" + id,'renderedview');
+    }
+
+</script>

@@ -1,0 +1,47 @@
+<h1>Lista zawodników</h1>
+
+<div>
+  <%= form_for [@project_strong, @player_strong], remote:true do |f| %>
+      <table class="table table-hover table-responsive">
+        <thead>
+        <tr>
+          <th>Obecność</th>
+          <th>Imię</th>
+          <th>Nazwisko</th>
+          <th>Zdjęcie</th>
+          <th>Grupa</th>
+          <th>Miasto</th>
+          <th>Kraj</th>
+          <th>Wiek</th>
+          <th>Waga</th>
+          <th>Wzrost</th>
+          <th>Opis</th>
+          <th colspan="1"></th>
+        </tr>
+        </thead>
+
+        <tbody id="tableajax" >
+        <%= render 'elements' %>
+        </tbody>
+        <tbody>
+        <tr>
+          <td><%= f.check_box :presence, :id => "presencecheckbox", :class => "form-control" %></td>
+          <td><%= f.text_field :name, :id => "nametextfield", :placeholder => "Imię", :class => "form-control" %></td>
+          <td><%= f.text_field :surname, :id => "surnametextfield", :placeholder => "Nazwisko", :class => "form-control" %></td>
+          <td><%= f.text_field :photopath, :id => "photopathtextfield", :placeholder => "Przeglądaj...", :class => "form-control" %></td>
+          <td><%= f.select(:group_type_id, @project_strong.group_types.all.collect { |p| [ p.name, p.id ] }, {}, { :class => 'form-control', include_blank: true }) %></td>
+          <td><%= f.text_field :city, :id => "citytextfield", :placeholder => "Miasto", :class => "form-control" %></td>
+          <td><%= f.text_field :country, :id => "countrytextfield", :placeholder => "Kraj", :class => "form-control" %></td>
+          <td><%= f.number_field :old, :id => "oldnumberfield", :class => "form-control" %></td>
+          <td><%= f.number_field :weight, :id => "weightnumberfield", :class => "form-control" %></td>
+          <td><%= f.number_field :height, :id => "heightnumberfield", :class => "form-control" %></td>
+          <td><%= f.text_area :description, :id => "desctextarea", :placeholder => "Opis zawodnika", :class => "form-control"%></td>
+          <td><%= f.submit "Dodaj zawodnika", :class => "btn btn-primary" %></td>
+        </tr>
+        </tbody>
+      </table>
+  <% end %>
+
+  <div id="errorlist">
+  </div>
+</div>

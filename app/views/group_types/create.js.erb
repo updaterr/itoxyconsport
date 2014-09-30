@@ -1,0 +1,7 @@
+<%= @group_type.save %>
+$("#tableajax").html("");
+$("#tableajax").html("<%= j(render('elements', :group_types=> @group_types)) %>");
+
+$("#errorlist").html("<%= j(render('errors')) %>");
+
+$("#nametextfield").val('');

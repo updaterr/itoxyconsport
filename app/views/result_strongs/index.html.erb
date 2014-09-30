@@ -1,0 +1,34 @@
+<h1>Rezultaty zawodników</h1>
+
+<%= form_for('', method: :get) do |f| %>
+    <div class="form-group">
+      <label>Konkurencja</label>
+      <%= f.select(:compid, options_for_select(@project_strong.competition_strongs.all.collect {|p| [ p.title + " - " + @project_strong.group_types.find(p.group_types_id).name + " - " + p.countrepeat.to_s + " serie", p.id] }, :selected => params[:compid].to_i), {}, {:class => 'form-control', :onchange => "this.form.submit();" }) %>
+    </div>
+<% end %>
+
+
+<h3><%= @filtername.to_s.html_safe %></h3>
+
+<div>
+  <%= form_for [@project_strong, @result_strong], remote:true do |f| %>
+      <table class="table table-hover table-responsive">
+        <thead>
+        <tr>
+          <th>Imię i nazwisko</th>
+          <% @repeatscounts.to_i.times do %>
+              <th>Wynik</th>
+          <% end %>
+          <th colspan="1"></th>
+        </tr>
+        </thead>
+
+        <tbody id="tableajax" >
+        <%= render 'elements' %>
+        </tbody>
+      </table>
+  <% end %>
+
+  <div id="errorlist">
+  </div>
+</div>

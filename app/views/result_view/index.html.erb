@@ -1,0 +1,154 @@
+<body class="body-resultview">
+<div class="">
+  <% if params[:showaction] == "showPlayer" and params[:playerid] != nil%>
+      <div class="container">
+        <div id="products" class="row list-group">
+          <div class="item">
+            <div class="thumbnail">
+              <!--<img class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" />-->
+              <div class="caption">
+                <h4 class="group inner list-group-item-heading">
+                  <p class="group inner list-group-item-text">
+                  </p>
+                </h4>
+                <div class="row">
+                  <div>
+                    <p class="h1" style="font-size:60px;">
+                      <%=PlayerStrong.find(params[:playerid]).name %> <%= PlayerStrong.find(params[:playerid]).surname %>
+                      <br/>
+                      Miasto - <%= PlayerStrong.find(params[:playerid]).city %><br/>
+                      Kraj - <%= PlayerStrong.find(params[:playerid]).country %><br/>
+                      Wiek - <%= PlayerStrong.find(params[:playerid]).old %><br/>
+                      Waga - <%= PlayerStrong.find(params[:playerid]).weight %><br/>
+                      Wzrost - <%= PlayerStrong.find(params[:playerid]).height %><br/>
+                      <%= PlayerStrong.find(params[:playerid]).description %><br/>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+  <% elsif params[:showaction] == "sendAllPlayersText" and  params[:projectid] != nil%>
+
+      <% unless ProjectStrong.where("id = #{params[:projectid].to_i} AND user_id = #{current_user.id}").blank? %>
+          W konkursie bierze udział <%= ProjectStrong.find(params[:projectid]).player_strongs.count %> zawodników
+      <% end %>
+
+  <% elsif params[:showaction] == "sendAllCompetitionText" and  params[:projectid] != nil%>
+
+      <% unless ProjectStrong.where("id = #{params[:projectid].to_i} AND user_id = #{current_user.id}").blank? %>
+          W konkursie jest <%= ProjectStrong.find(params[:projectid]).competition_strongs.count %> konkurencji
+      <% end %>
+
+  <% elsif params[:showaction] == "sendAllResultsText" and  params[:projectid] != nil%>
+
+      <% unless ProjectStrong.where("id = #{params[:projectid].to_i} AND user_id = #{current_user.id}").blank? %>
+          Podniesiono <%= ProjectStrong.find(params[:projectid]).result_strongs.sum(:result1) + ProjectStrong.find(params[:projectid]).result_strongs.sum(:result2) + ProjectStrong.find(params[:projectid]).result_strongs.sum(:result3) + ProjectStrong.find(params[:projectid]).result_strongs.sum(:result4) + ProjectStrong.find(params[:projectid]).result_strongs.sum(:result5)   %> kilogramów w tym konkursie
+      <% end %>
+
+  <% elsif params[:showaction] == "sendAllGroupText" and  params[:projectid] != nil%>
+
+      <% unless ProjectStrong.where("id = #{params[:projectid].to_i} AND user_id = #{current_user.id}").blank? %>
+          W konkursie jest <%= ProjectStrong.find(params[:projectid]).group_types.count %> grup
+      <% end %>
+
+  <% elsif params[:showaction] == "sendPlayersInCompetitionText" and params[:projectid] != nil and params[:competitionid] != nil%>
+
+      <% unless ProjectStrong.where("id = #{params[:projectid].to_i} AND user_id = #{current_user.id}").blank? %>
+          W konkurencji jest <%=  ProjectStrong.find(params[:projectid]).result_strongs.where("competition_strong_id = #{params[:competitionid]}").count %> zawodników
+      <% end %>
+
+  <% elsif params[:showaction] == "sendResultsInCompetitionText" and params[:projectid] != nil and params[:competitionid] != nil%>
+
+      <% unless ProjectStrong.where("id = #{params[:projectid].to_i} AND user_id = #{current_user.id}").blank? %>
+          Podniesiono <%= ProjectStrong.find(params[:projectid]).result_strongs.where("competition_strong_id = #{params[:competitionid]}").sum(:result1) + ProjectStrong.find(params[:projectid]).result_strongs.where("competition_strong_id = #{params[:competitionid]}").sum(:result2) + ProjectStrong.find(params[:projectid]).result_strongs.where("competition_strong_id = #{params[:competitionid]}").sum(:result3) + ProjectStrong.find(params[:projectid]).result_strongs.where("competition_strong_id = #{params[:competitionid]}").sum(:result4) + ProjectStrong.find(params[:projectid]).result_strongs.where("competition_strong_id = #{params[:competitionid]}").sum(:result5) %> kilogramów w tej konkurencji
+      <% end %>
+
+  <% elsif params[:showaction] == "showTableResultInCompetition" and params[:projectid] != nil and params[:competitionid] != nil%>
+
+      <% unless ProjectStrong.where("id = #{params[:projectid].to_i} AND user_id = #{current_user.id}").blank? %>
+
+          <%= generateTitleGroup %>
+          <table class="table table-responsive">
+            <thead>
+            <tr>
+              <th>Imię i nazwisko</th>
+              <% getCounts().to_i.times do %>
+                  <th>Wynik</th>
+              <% end %>
+              <th colspan="1"></th>
+            </tr>
+            </thead>
+
+            <tbody id="tableajax" style="font-size:40px;" >
+
+            <% ProjectStrong.find(params[:projectid]).result_strongs.where("competition_strong_id = #{params[:competitionid]}").each do |result_strong| %>
+                <tr id="tr_<%= result_strong.id %>">
+                  <td><%= getPlayerStrongNameSurname(result_strong.player_strong_id) %></td>
+
+                  <!-- dac warunek ile tam jest tych serii i tylko tyle wyswietlic -->
+
+                  <% if getCounts().to_i>=1 %>
+                      <td><%= result_strong.result1 %> <%= result_strong.result1ok ? "Zal" : "Nie" %></td>
+                  <% end %>
+                  <% if getCounts().to_i>=2 %>
+                      <td><%= result_strong.result2 %> <%= result_strong.result2ok ? "Zal" : "Nie" %></td>
+                  <% end %>
+                  <% if getCounts().to_i>=3 %>
+                      <td><%= result_strong.result3 %> <%= result_strong.result3ok ? "Zal" : "Nie" %></td>
+                  <% end %>
+                  <% if getCounts().to_i>=4 %>
+                      <td><%= result_strong.result4 %> <%= result_strong.result4ok ? "Zal" : "Nie" %></td>
+                  <% end %>
+                  <% if getCounts().to_i>=5 %>
+                      <td><%= result_strong.result5 %> <%= result_strong.result5ok ? "Zal" : "Nie" %></td>
+                  <% end %>
+                  <% if getCounts().to_i>=6 %>
+                      <td><%= result_strong.result6 %> <%= result_strong.result6ok ? "Zal" : "Nie" %></td>
+                  <% end %>
+                  <% if getCounts().to_i>=7 %>
+                      <td><%= result_strong.result7 %> <%= result_strong.result7ok ? "Zal" : "Nie" %></td>
+                  <% end %>
+                  <% if getCounts().to_i>=8 %>
+                      <td><%= result_strong.result8 %> <%= result_strong.result8ok ? "Zal" : "Nie" %></td>
+                  <% end %>
+                  <% if getCounts().to_i>=9 %>
+                      <td><%= result_strong.result9 %> <%= result_strong.result9ok ? "Zal" : "Nie" %></td>
+                  <% end %>
+                  <% if getCounts().to_i>=10 %>
+                      <td><%= result_strong.result10 %> <%= result_strong.result10ok ? "Zal" : "Nie" %></td>
+                  <% end %>
+                </tr>
+            <% end %>
+
+            </tbody>
+          </table>
+
+
+
+      <% end %>
+
+  <% elsif params[:showaction] == "showTableResultInProject" and params[:projectid] != nil and params[:competitionid] != nil%>
+
+      <% unless ProjectStrong.where("id = #{params[:projectid].to_i} AND user_id = #{current_user.id}").blank? %>
+          cała tabela wynikow konkursie(<%= params[:competitionid] %>)
+      <% end %>
+
+  <% elsif params[:showaction] == "showTop3ResultInProject" and params[:projectid] != nil and params[:competitionid] != nil%>
+
+      <% unless ProjectStrong.where("id = #{params[:projectid].to_i} AND user_id = #{current_user.id}").blank? %>
+          Top3 w grupie <%= generateGroup %>
+          <%= get3bestingroup.html_safe %>
+
+      <% end %>
+
+  <% else %>
+      Złe zapytanie.
+
+  <% end %>
+</div>
+</body>

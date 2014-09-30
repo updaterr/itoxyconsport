@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <h1>Lista projektów</h1>
+    <% @project_strongs.each do |project_strong| %>
+        <div class="list-group-item col-md-10">
+          <div class="media col-md-3">
+            <figure>
+              <img class="media-object img-rounded img-responsive " src="http://placehold.it/250x200">
+            </figure>
+          </div>
+          <div class="col-md-6">
+            <h4 class="list-group-item-heading"> <%= project_strong.name %><small> UserId: <%= project_strong.user_id %></small> </h4>
+            <p class="list-group-item-text"> <%= project_strong.description %> </p><br />
+            <p><i class="fa fa-user"></i> <%= project_strong.player_strongs.count %> | <i class="fa fa-group"></i> <%= project_strong.group_types.count %> | <i class="fa fa-sitemap"></i> <%= project_strong.competition_strongs.count %> | <i class="fa fa-calendar"></i> <%= project_strong.created_at %> (<%= time_ago_in_words(project_strong.created_at) %> temu)</p>
+          </div>
+          <div class="col-md-3 text-center">
+            <h4><%= getProjectTypesName(project_strong.project_types_id) %></h4>
+            <%= link_to '<button type="button" class="btn btn-default btn-lg btn-block">Przejdź</button>'.html_safe, project_strong %>
+            <P><%= link_to 'Edytuj', edit_project_strong_path(project_strong) %> | <%= link_to 'Usuń', project_strong, method: :delete, data: { confirm: 'Are you sure?' } %></P>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+    <% end %>
+  </div>
+</div>

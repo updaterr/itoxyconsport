@@ -1,0 +1,48 @@
+<% @result_strongs.each do |result_strong| %>
+    <tr id="tr_<%= result_strong.id %>">
+      <td><%= getPlayerStrongNameSurname(result_strong.player_strong_id) %></td>
+
+      <!-- dac warunek ile tam jest tych serii i tylko tyle wyswietlic -->
+
+      <% if @repeatscounts>=1 %>
+          <td><%= best_in_place [@project_strong, result_strong], :result1, :type => :input %>
+          <%= best_in_place [@project_strong, result_strong], :result1ok, :type => :checkbox, :collection => [raw("Niezaliczone"), raw("Zaliczone")] %></td>
+      <% end %>
+      <% if @repeatscounts>=2 %>
+          <td><%= best_in_place [@project_strong, result_strong], :result2, :type => :input %>
+          <%= best_in_place [@project_strong, result_strong], :result2ok, :type => :checkbox, :collection => [raw("Niezaliczone"), raw("Zaliczone")] %></td>
+      <% end %>
+      <% if @repeatscounts>=3 %>
+          <td><%= best_in_place [@project_strong, result_strong], :result3, :type => :input %>
+          <%= best_in_place [@project_strong, result_strong], :result3ok, :type => :checkbox, :collection => [raw("Niezaliczone"), raw("Zaliczone")] %></td>
+      <% end %>
+      <% if @repeatscounts>=4 %>
+          <td><%= best_in_place [@project_strong, result_strong], :result4, :type => :input %>
+          <%= best_in_place [@project_strong, result_strong], :result4ok, :type => :checkbox, :collection => [raw("Niezaliczone"), raw("Zaliczone")] %></td>
+      <% end %>
+      <% if @repeatscounts>=5 %>
+          <td><%= best_in_place [@project_strong, result_strong], :result5, :type => :input %>
+          <%= best_in_place [@project_strong, result_strong], :result5ok, :type => :checkbox, :collection => [raw("Niezaliczone"), raw("Zaliczone")] %></td>
+      <% end %>
+      <% if @repeatscounts>=6 %>
+          <td><%= best_in_place [@project_strong, result_strong], :result6, :type => :input %>
+         <%= best_in_place [@project_strong, result_strong], :result6ok, :type => :checkbox, :collection => [raw("Niezaliczone"), raw("Zaliczone")] %></td>
+      <% end %>
+      <% if @repeatscounts>=7 %>
+          <td><%= best_in_place [@project_strong, result_strong], :result7, :type => :input %>
+         <%= best_in_place [@project_strong, result_strong], :result7ok, :type => :checkbox, :collection => [raw("Niezaliczone"), raw("Zaliczone")] %></td>
+      <% end %>
+      <% if @repeatscounts>=8 %>
+          <td><%= best_in_place [@project_strong, result_strong], :result8, :type => :input %>
+          <%= best_in_place [@project_strong, result_strong], :result8ok, :type => :checkbox, :collection => [raw("Niezaliczone"), raw("Zaliczone")] %></td>
+      <% end %>
+      <% if @repeatscounts>=9 %>
+          <td><%= best_in_place [@project_strong, result_strong], :result9, :type => :input %>
+         <%= best_in_place [@project_strong, result_strong], :result9ok, :type => :checkbox, :collection => [raw("Niezaliczone"), raw("Zaliczone")] %></td>
+      <% end %>
+      <% if @repeatscounts>=10 %>
+          <td><%= best_in_place [@project_strong, result_strong], :result10, :type => :input %>
+         <%= best_in_place [@project_strong, result_strong], :result10ok, :type => :checkbox, :collection => [raw("Niezaliczone"), raw("Zaliczone")] %></td>
+      <% end %>
+    </tr>
+<% end %>

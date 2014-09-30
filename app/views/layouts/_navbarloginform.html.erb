@@ -1,0 +1,11 @@
+<div class="navbar-form navbar-right">
+  <%= form_for(:user, :url => session_path(:user)) do |f| %>
+      <div class="form-group">
+        <%= f.email_field :email, autofocus: true, :placeholder => "login", :class => "form-control" %>
+        <%= f.password_field :password, autocomplete: "off", :placeholder => "hasło", :class => "form-control"%>
+      </div>
+      <%= f.submit "Zaloguj się", :class => "btn btn-primary"%><br/>
+      &nbsp;<%= f.check_box :remember_me %> Nie wylogowuj mnie
+      <small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to "Zapomniałeś hasła ?", new_password_path(:user), :class => 'navbar-link'  %></small>
+  <% end %>
+</div>
