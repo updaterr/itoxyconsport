@@ -113,4 +113,7 @@
       <index name="index_users_on_email" unique="true" columns="email"/>
     </table>
   </data-source>
+  <data-source source="LOCAL" name="Rails ItoxyconSport: production" uuid="d8fa6bac-ed27-4fcd-a856-e8d2ee273ad2">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
 </component>
